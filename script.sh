@@ -1,15 +1,4 @@
-hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-~/Notes/Running-a-local-Fuel-node-connected-to-Mainnet-using-P2P (main ✔) git pull
-remote: Enumerating objects: 5, done.
-remote: Counting objects: 100% (5/5), done.
-remote: Compressing objects: 100% (3/3), done.
-remote: Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
-Unpacking objects: 100% (3/3), 944 bytes | 188.00 KiB/s, done.
-From https://github.com/0xHawre/Running-a-local-Fuel-node-connected-to-Mainnet-using-P2P
-   3f43289..78d5485  main       -> origin/main
-Auto-merging script.sh
-Merge made by the 'ort' strategy.
-~/Notes/Running-a-local-Fuel-node-connected-to-Mainnet-using-P2P (main ✔) cat script.sh
+
 #!/bin/bash
 
 # Color variables for design
