@@ -25,29 +25,22 @@ install_tmux() {
 echo -e "${YELLOW}Installing Fuel...${RESET}"
 curl -s https://install.fuel.network | sh
 
+
 get_peer_id() {
-    read -p "Do you have 'peer_id'? (yes/no): " has_peer_id
+    read -p "Do you have 'secret'? (yes/no): " has_peer_id
     if [ "$has_peer_id" = "no" ]; then
-        echo -e "${YELLOW}Generating new peer id....${RESET}"
-        fuel-core-keygen new --key-type peering > temp.txt
-        sleep 2
-        peer_id=$(grep -o '16Uiu2HAm[^\"]*' temp.txt)
-        echo "{\"peer_id\":\"$peer_id\"}" > wallet.txt
-        echo -e "${GREEN}New peer_id saved in wallet.txt${RESET}"
-        rm temp.txt
+      fuel-core-keygen new --key-type peering > wallet.txt 
     elif [ "$has_peer_id" = "yes" ]; then
-        read -p "Please enter your peer_id: " secret
-        echo "{\"peer_id\":\"$secret\"}" > wallet.txt
-        echo -e "${GREEN}Provided peer_id saved in wallet.txt${RESET}"
-    else
+        read -p "Please enter your peer_id and secre: " secret
+        secret > wallet.txt 
+     else
         echo -e "${RED}Invalid input. Please type 'yes' or 'no'.${RESET}"
     fi
 }
-
 get_peer_id
 
 sleep 5
-secret=$(grep -o '"secret":"[^"]*' wallet.txt | sed 's/"peer_id":"//')
+secret=$(grep -o '"secret":"[^"]*' wallet.txt | sed 's/"secret":"//')
 echo "The secret: $secret"
 
 sleep 5
