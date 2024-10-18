@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Color variables for design
@@ -25,18 +24,19 @@ install_tmux() {
 echo -e "${YELLOW}Installing Fuel...${RESET}"
 curl -s https://install.fuel.network | sh
 
-
 get_peer_id() {
     read -p "Do you have 'secret'? (yes/no): " has_peer_id
     if [ "$has_peer_id" = "no" ]; then
-      fuel-core-keygen new --key-type peering > wallet.txt 
+        fuel-core-keygen new --key-type peering > wallet.txt
     elif [ "$has_peer_id" = "yes" ]; then
-        read -p "Please enter your peer_id and secre: " secret
-        secret > wallet.txt 
-     else
+        read -p "Please enter your peer_id and secret (in JSON format): " secret_json
+        echo "$secret_json" > wallet.txt
+    else
         echo -e "${RED}Invalid input. Please type 'yes' or 'no'.${RESET}"
+        exit 1
     fi
 }
+
 get_peer_id
 
 sleep 5
@@ -48,8 +48,8 @@ sleep 5
 # Set open file limit
 ulimit -S -n 32768
 
-read -p "main-net node name: " nodename
-read -p "ETH main-net RPC: " RPC
+read -p "Main-net node name: " nodename
+read -p "ETH Main-net RPC: " RPC
 
 tmux new-session -d -s fuel-node
 
@@ -70,5 +70,6 @@ fuel-core run \
 --relayer-log-page-size=100 \
 --sync-block-stream-buffer-size 30" C-m
 
-echo -e "${YELLOW}Check logs: tmux attach-session -t fuel-node${RESET}"
+echo -e "${YELLOW}Check logs: tmux attach-session -t fuel-node${RESET}"  
+
 
