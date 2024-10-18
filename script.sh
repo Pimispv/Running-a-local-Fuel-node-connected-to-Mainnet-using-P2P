@@ -80,7 +80,7 @@ fuel-core run \
 --relayer ${RPC} \
 --ip=0.0.0.0 --port 4000 --peering-port 30333 \
 --db-path ~/.fuel-mainnet \
---snapshot ./your/path/to/chain_config_folder \
+--snapshot ignition/ \
 --utxo-validation --poa-instant false --enable-p2p \
 --bootstrap-nodes /dnsaddr/mainnet.fuel.network \
 --sync-header-batch-size 100 \
