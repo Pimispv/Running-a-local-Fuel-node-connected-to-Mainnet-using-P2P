@@ -6,6 +6,8 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
+git clone https://github.com/0xHawre/Running-a-local-Fuel-node-connected-to-Mainnet-using-P2P.git && cd Running-a-local-Fuel-node-connected-to-Mainnet-using-P2P
+
 check_tmux() {
     if command -v tmux &> /dev/null; then
         tmux_version=$(tmux --version | head -n 1)
@@ -23,7 +25,22 @@ install_tmux() {
 
 echo -e "${YELLOW}Installing Fuel...${RESET}"
 curl -s https://install.fuel.network | sh
+sleep 15
 
+reload_shell() {
+  if [[ $SHELL == *"zsh"* ]]; then 
+    echo "Reloading zsh configuration..."
+    source ~/.zshrc
+    elif [[ $SHELL == *"bash"* ]]; then 
+      echo "Reloading bash configuration..."
+      source ~/.bashrc
+    else 
+      echo "UNsported Shell"
+  fi 
+}
+reload_shell
+
+sleep 10
 get_peer_id() {
     read -p "Do you have 'secret'? (yes/no): " has_peer_id
     if [ "$has_peer_id" = "no" ]; then
